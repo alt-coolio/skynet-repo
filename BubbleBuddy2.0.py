@@ -53,12 +53,10 @@ print(randomList2)
 # cutList.append([])
 # print(cutList)
 
-print(len(randomList2) - 1)
-print()
-
-tempList = randomList2
-
-print(max(randomList2))
+# print(len(randomList2) - 1)
+# print()
+# tempList = randomList2
+# print(max(randomList2))
 
 max_num = max(randomList2)
 q = len(randomList2)
@@ -66,26 +64,19 @@ q = len(randomList2)
 # j = len(randomList2) - 1
 # k = 0
 for i in range(q):
-    endCond = True
 
     # print()
     # print(k)
     # print(-j)
     # print()
     for n in range(q - i - 1):
-        print()
-        print(q, i, n)
+        # print()
+        # print(q, i, n)
         if randomList2[n] > randomList2[n+1]:
             temp = randomList2[n]
             randomList2[n] = randomList2[n+1]
             randomList2[n+1] = temp
-            print('switched', randomList2[n], randomList2[n+1])
-            print()
-            endCond = False
-
-    if endCond is True:
-        break
-
-
+            # print('switched', randomList2[n], randomList2[n+1])
+            # print()
 print()
-print(randomList2)
+print("Sorted list:", randomList2)
