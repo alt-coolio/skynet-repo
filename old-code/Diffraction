@@ -1,0 +1,34 @@
+from calendar import different_locale
+import diffractsim
+diffractsim.set_backend("CPU") #Change the string to "CUDA" to use GPU acceleration
+
+from diffractsim import MonochromaticField, ApertureFromImage, Lens, nm, mm, cm, RectangularSlit
+
+F = MonochromaticField(
+    wavelength=770 * nm, extent_x=27. * mm, extent_y=27. * mm, Nx=2000, Ny=2000,intensity = 10e2
+)
+
+# F.add(ApertureFromImage("QWT.png", image_size=(15 * mm, 15 * mm), simulation = F))
+
+D = 1 * mm  #slits separation
+F.add(RectangularSlit(width = 0.2*mm, height = 1.5*mm, x0 = -D/2 , y0 = 0)   +   RectangularSlit(width = 0.2*mm, height = 1.5*mm, x0 = D/2, y0 = 0))
+
+rgb = F.get_colors()
+F.plot_colors(rgb)
+
+
+# F.add(Lens(f = 1*cm))
+
+F.propagate(5*cm)
+
+rgb1 = F.get_colors()
+F.plot_colors(rgb1, xlim=[-8*mm,8*mm], ylim=[-8*mm,8*mm])
+
+F.zoom_propagate(400*cm, x_interval = [-40. * mm, 40. * mm], y_interval = [-40*mm, 40*mm])
+
+
+rgb2 = F.get_colors()
+F.plot_colors(rgb2)
+
+I = F.get_intensity()
+F.plot_intensity(I, square_root = True, units = mm, grid = True, figsize = (14,5), slice_y_pos = 0*mm)
